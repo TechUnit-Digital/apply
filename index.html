@@ -2,31 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TechUnit | Digital Consultancy</title>
 <style>
-  /* 1. OLED PURE BLACK BASE */
+  /* 1. OLED BLACK BASE */
   body {
     background-color: #000000;
     color: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* FLEXBOX LAYOUT */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    
+    /* MOBILE SAFARI FIX: Use 'dvh' */
+    min-height: 100dvh; 
     margin: 0;
+    padding: 20px;
     text-align: center;
-    overflow: hidden;
-    position: relative; /* Needed for footer positioning */
+    box-sizing: border-box;
   }
 
-  /* 2. TYPOGRAPHY */
+  /* 2. RESPONSIVE TYPOGRAPHY */
   h1 {
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
     font-weight: 700;
     margin: 0 0 1rem 0;
-    letter-spacing: -2.5px;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
     background: -webkit-linear-gradient(#fff, #888);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -34,8 +39,8 @@
 
   p.sub {
     color: #a1a1a1;
-    font-size: 1.3rem;
-    max-width: 650px;
+    font-size: clamp(1rem, 4vw, 1.3rem); 
+    max-width: 600px;
     line-height: 1.6;
     margin-bottom: 3rem;
     font-weight: 400;
@@ -46,13 +51,13 @@
   /* 3. ANIMATION */
   .fade-up {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
     animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
   .delay-1 { animation-delay: 0.2s; }
   .delay-2 { animation-delay: 0.6s; }
   .delay-3 { animation-delay: 1.0s; }
-  .delay-4 { animation-delay: 1.5s; } /* Footer appears last */
+  .delay-4 { animation-delay: 1.5s; }
 
   @keyframes fadeInUp {
     to { opacity: 1; transform: translateY(0); }
@@ -62,8 +67,8 @@
   .btn {
     background-color: #ffffff;
     color: #000000;
-    padding: 16px 36px;
-    font-size: 0.9rem;
+    padding: 16px 32px;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
@@ -71,7 +76,9 @@
     border-radius: 4px;
     transition: all 0.3s ease;
     border: 1px solid #ffffff;
+    display: inline-block;
   }
+  
   .btn:hover {
     background-color: #000000;
     color: #ffffff;
@@ -79,25 +86,29 @@
     transform: scale(1.02);
   }
 
-  /* 5. THE NEW "TRUST" FOOTER */
+  /* 5. THE RESPONSIVE FOOTER */
   .footer {
-    position: absolute;
-    bottom: 30px;
-    font-size: 0.75rem;
-    color: #444; /* Very dark grey - subtle */
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .footer a {
+    margin-top: auto;
+    padding-top: 40px;
+    font-size: 0.7rem;
     color: #444;
-    text-decoration: none;
-    transition: color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  /* Tablet/Desktop Tweaks */
+  @media (min-width: 768px) {
+    .footer {
+      flex-direction: row;
+      gap: 20px;
+    }
   }
   
-  .footer a:hover { color: #888; } /* Lightens on hover */
+  .footer a { color: #444; text-decoration: none; }
 
 </style>
 </head>
@@ -111,16 +122,18 @@
     Scouting for a <strong>Principal Technical Lead</strong> and a <strong>Lead Product Designer</strong>.
   </p>
 
-  <a class="fade-up delay-3 btn" 
-     href="mailto:careers@techunit.ae?subject=Application%3A%20Founding%20Team%20(2026)&body=Hi%20TechUnit%2C%0A%0AI%20am%20applying%20for%20the%20role%20of%3A%0A%5B%20Technical%20Lead%20%2F%20Product%20Designer%20%5D%0A%0A%E2%80%A2%20Portfolio%2FGitHub%3A%20%0A%E2%80%A2%20LinkedIn%3A%20%0A%E2%80%A2%20Current%20Location%3A%20Dubai%20%2F%20Remote%0A%0AWhy%20I%20belong%20on%20the%20Founding%20Team%3A%0A%5B%20One%20sentence%20pitch%20%5D%0A%0ABest%2C%0A">
-     APPLY FOR ACCESS
-  </a>
+  <div class="fade-up delay-3">
+    <a class="btn" 
+       href="mailto:careers@techunit.ae?subject=Application%3A%20Founding%20Team&body=Hi%20TechUnit%20I%20am%20applying%20for%20the%20founding%20team%20role%20and%20here%20is%20my%20portfolio%20[LINK]%20which%20demonstrates%20why%20I%20am%20the%20right%20architect%20for%20your%202026%20core%20team.">
+       APPLY FOR ACCESS
+    </a>
+  </div>
 
   <div class="fade-up delay-4 footer">
     <span>Dubai, UAE</span>
-    <span>•</span>
+    <span style="display:none; display:inline-block-desktop;">•</span>
     <span>Business Village, Block B</span>
-    <span>•</span>
+    <span style="display:none; display:inline-block-desktop;">•</span>
     <a href="mailto:info@techunit.ae">info@techunit.ae</a>
   </div>
 
